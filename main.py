@@ -1,0 +1,15 @@
+import numpy as np
+import pandas as pd
+from DataProcess import combineSeqFid, combineSeqData
+
+Data = pd.read_csv('pdData.csv')
+
+seq =np.array(Data['Seq'], dtype=str)  # 读取pdData.csv中的序号
+
+X = combineSeqData(Data)
+y = np.array(Data['Face'].values)
+
+iamges = combineSeqFid(Data)  # 根据序号读取图像（128 * 128）
+target_names = list(set(Data['Face']))
+
+print("第一个数据的序号为", seq[0], "\n图像数据是", X[0], "\n标签是", y[0])
