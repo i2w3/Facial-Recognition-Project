@@ -19,16 +19,9 @@ X2 = pca.transform(X)
 # 78 0.607679
 
 num_folds = 10
-
-models = [('NB', GaussianNB())]
-
-results = []
-names = []
 scoring = 'accuracy'
-for name, model in models:
-    kfold = model_selection.KFold(n_splits=num_folds)
-    cv_results = model_selection.cross_val_score(model, X2, y, cv=kfold, scoring=scoring)
-    results.append(cv_results)
-    names.append(name)
-    msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-    print(msg)
+
+kfold = model_selection.KFold(n_splits=num_folds)
+cv_results = model_selection.cross_val_score(GaussianNB(), X2, y, cv=kfold, scoring=scoring)
+msg = "%s: %f (%f)" % ("NB", cv_results.mean(), cv_results.std())
+print(msg)
