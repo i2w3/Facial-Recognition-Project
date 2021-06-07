@@ -11,7 +11,7 @@ y = np.array(Data['Face'].values)
 
 pca = PCA(n_components=76, svd_solver='auto',
           whiten=True).fit(X)
-X2 = pca.transform(X)
+X1 = pca.transform(X)
 # 74 0.601884
 # 75 0.607680
 # 76 0.608690
@@ -21,7 +21,8 @@ X2 = pca.transform(X)
 num_folds = 10
 scoring = 'accuracy'
 
-kfold = model_selection.KFold(n_splits=num_folds)
-cv_results = model_selection.cross_val_score(GaussianNB(), X2, y, cv=kfold, scoring=scoring)
-msg = "%s: %f (%f)" % ("NB", cv_results.mean(), cv_results.std())
-print(msg)
+for name, data in (["Raw", X], ["PCA", X1]):
+    kfold = model_selection.KFold(n_splits=num_folds)
+    cv_results = model_selection.cross_val_score(GaussianNB(), data, y, cv=kfold, scoring=scoring)
+    msg = "%s NB: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+    print(msg)
