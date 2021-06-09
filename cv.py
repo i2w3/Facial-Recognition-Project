@@ -1,28 +1,21 @@
 import numpy as np
 import pandas as pd
-
+from DataProcess import combineSeqData
 from sklearn.decomposition import PCA
 from sklearn.naive_bayes import GaussianNB
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
-# Define a pipeline to search for the best combination of PCA truncation
-# and classifier regularization.
 pca = PCA()
-# set the tolerance to a large value to make the example faster
-
 pipe = Pipeline(steps=[('pca', pca), ('NB', GaussianNB())])
 
-from DataProcess import combineSeqData
 
 Data = pd.read_csv('pdData.csv')
-
 seq = np.array(Data['Seq'], dtype=str)
 target = np.array(Data['Face'].values)
 target_names = list(set(Data['Face']))
 
 X_digits = combineSeqData(Data)
-
 y_digits = target
 
 # Parameters of pipelines can be set using ‘__’ separated parameter names:
