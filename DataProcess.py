@@ -30,7 +30,6 @@ def getFid(DataName):
 def imgDataProcess():
     imgData = []  # 存放合适图像数据的序列
     skip = []
-    s512 = []
     for dataName in os.listdir(rawDataPath):
         fid = getFid(dataName)
         if np.all(fid == 0):  # 这些图像数据全为 0，保存序号到skip
@@ -113,11 +112,3 @@ def outputImages(outputImagesPath=outputImgPath):
         fid = getFid(Img)
         im = Image.fromarray(fid)
         im.save(os.path.join(outputImagesPath, Img) + '.jpg')
-
-
-'''
-def valData():
-    print("判断有无异常值：")
-    print(pd.isna(targetData).any())
-    print("判断标签数据是否匹配：")
-'''
