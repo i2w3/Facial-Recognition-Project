@@ -1,4 +1,20 @@
+# How to download
+```git
+git clone git@github.com:i2w3/pypy.git
+```
+下载太慢？试试Github镜像站
+```
+git clone https://ghproxy.com/https://github.com/i2w3/pypy.git
+```
 # How to use
+## 0.install requirements
+```cmd
+pip install pillow
+conda install numpy
+conda install pandas
+conda install scikit-learn
+conda install scikit-image
+```
 ## 1.Run build_pdData.py
 生成pdData.csv，该文件类似这样：
 
