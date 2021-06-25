@@ -112,3 +112,4 @@ def outputImages(outputImagesPath=outputImgPath):
         fid = getFid(Img)
         im = Image.fromarray(fid)
         im.save(os.path.join(outputImagesPath, Img) + '.jpg')
+
