@@ -32,12 +32,12 @@ param_grid = {
 kfold = 10
 scoring = 'accuracy'
 
-search = GridSearchCV(pipe1, param_grid, n_jobs=-1,cv=kfold, scoring=scoring)
-search.fit(X_digits, y_digits)
-print("GaussianNB Best parameter (CV score=%0.3f):" % search.best_score_)
-print(search.best_params_)
+search1 = GridSearchCV(pipe1, param_grid, n_jobs=-1, cv=kfold, scoring=scoring)
+search1.fit(X_digits, y_digits)
+print("GaussianNB Best parameter (CV score=%0.3f):" % search1.best_score_)
+print(search1.best_params_)
 
-search = GridSearchCV(pipe2, param_grid, n_jobs=-1,cv=kfold, scoring=scoring)
-search.fit(X_digits, y_digits)
-print("BernoulliNB Best parameter (CV score=%0.3f):" % search.best_score_)
-print(search.best_params_)
+search2 = GridSearchCV(pipe2, param_grid, n_jobs=-1, cv=kfold, scoring=scoring)
+search2.fit(X_digits, y_digits)
+print("BernoulliNB Best parameter (CV score=%0.3f):" % search2.best_score_)
+print(search2.best_params_)

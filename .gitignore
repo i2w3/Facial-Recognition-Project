@@ -1,6 +1,5 @@
 /.idea
 /.vscode
 /__pycache__
-resize.py
 fe.py
 line.py

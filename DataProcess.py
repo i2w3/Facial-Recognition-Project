@@ -21,7 +21,7 @@ def getFid(DataName):
         array = array.reshape(reshapeSie, reshapeSie)
         # 将图像从 512*512 压缩到 128*128
         if array.shape == (512, 512):
-            array = cv2.resize(array, (128, 128), interpolation=cv2.INTER_LINEAR)
+            array = cv2.resize(array, (128, 128))
             print(DataName, '已经从 512 * 512 压缩到 128 * 128')
         return array
 
