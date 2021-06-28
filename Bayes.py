@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from DataProcess import combineSeqFid, combineSeqData
 from sklearn import model_selection
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB,BernoulliNB
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -35,5 +35,11 @@ scoring = 'accuracy'
 for name, data in (["Raw", X], ["PCA", X1], ["Std", X2], ["Std+PCA", X3]):
     kfold = model_selection.KFold(n_splits=num_folds)
     cv_results = model_selection.cross_val_score(GaussianNB(), data, y, cv=kfold, scoring=scoring)
+    msg = "%s NB: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+    print(msg)
+
+for name, data in (["Raw", X], ["PCA", X1], ["Std", X2], ["Std+PCA", X3]):
+    kfold = model_selection.KFold(n_splits=num_folds)
+    cv_results = model_selection.cross_val_score(BernoulliNB(), data, y, cv=kfold, scoring=scoring)
     msg = "%s NB: %f (%f)" % (name, cv_results.mean(), cv_results.std())
     print(msg)
