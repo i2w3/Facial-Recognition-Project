@@ -25,7 +25,7 @@ param_grid = {
     'pca__whiten': [True]
 }
 '''
-# SVD和Whiten的参数：
+# SVD和whiten的参数：
 'pca__svd_solver':['auto', 'full', 'arpack', 'randomized'],
 'pca__whiten':[True, False]
 '''
