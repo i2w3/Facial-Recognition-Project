@@ -4,12 +4,18 @@ import cv2
 import numpy as np
 import pandas as pd
 from PIL import Image
+from skimage import data, filters
+from skimage.feature import local_binary_pattern
 
 # 定义数据路径
 labelPath = 'face/'  # 标签路径
 labelFile = ['faceDR', 'faceDS']  # 标签文件
 rawDataPath = 'face/rawdata/'  # 图像路径
 outputImgPath = 'out/'  # 输出图像路径
+
+# settings for LBP
+radius = 3  # LBP算法中范围半径的取值
+n_points = 8 * radius  # 领域像素点数
 
 
 # 将二进制的图像数据集转为矩阵，同时负责压缩某些图像，输入DataName（序号），输出矩阵
@@ -113,3 +119,23 @@ def outputImages(outputImagesPath=outputImgPath):
         im = Image.fromarray(fid)
         im.save(os.path.join(outputImagesPath, Img) + '.jpg')
 
+
+# LBP特征
+def getLBPFid(DataName):
+    with open(rawDataPath + DataName, 'r') as file:
+        array = np.fromfile(file, 'B')
+        size = array.size
+        reshapeSie = int(size ** 0.5)  # 128 * 128 与 512 * 512
+        image = array.reshape(reshapeSie, reshapeSie)
+        lbp = local_binary_pattern(image, n_points, radius)
+        return lbp
+
+
+# 合并LBP特征图像数据
+def combineLBPSeqData(DataFrame):
+    data = np.zeros((len(DataFrame), 128 * 128))
+    k = range(len(DataFrame))
+    for (i, j) in zip(DataFrame['Seq'], k):
+        fid = getLBPFid(str(i))
+        data[j] = fid.flatten()
+    return data
