@@ -15,8 +15,10 @@ pca = PCA(n_components=76, svd_solver='auto',
           whiten=True).fit(X)
 X1 = pca.transform(X)
 
+# X2 LBP
 X2 = combineLBPSeqData(Data)
 
+# X3 LBP + PCA 76个特征
 pca = PCA(n_components=76, svd_solver='auto',
           whiten=True).fit(X2)
 X3 = pca.transform(X2)
