@@ -122,13 +122,9 @@ def outputImages(outputImagesPath=outputImgPath):
 
 # LBP特征
 def getLBPFid(DataName):
-    with open(rawDataPath + DataName, 'r') as file:
-        array = np.fromfile(file, 'B')
-        size = array.size
-        reshapeSie = int(size ** 0.5)  # 128 * 128 与 512 * 512
-        image = array.reshape(reshapeSie, reshapeSie)
-        lbp = local_binary_pattern(image, n_points, radius)
-        return lbp
+    array = getFid(DataName)
+    lbp = local_binary_pattern(array, n_points, radius)
+    return lbp
 
 
 # 合并LBP特征图像数据
