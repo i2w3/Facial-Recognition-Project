@@ -127,7 +127,7 @@ def getLBPFid(DataName):
     return lbp
 
 
-# 合并LBP特征图像数据
+# 合并LBP特征图像数据并扁平化
 def combineLBPSeqData(DataFrame):
     data = np.zeros((len(DataFrame), 128 * 128))
     k = range(len(DataFrame))
