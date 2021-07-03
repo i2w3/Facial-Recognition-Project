@@ -26,6 +26,7 @@ num_folds = 10
 scoring = 'accuracy'
 
 print("Naive Bayes：")
+print("The face label of the dataset contains:", list(set(Data['Face'])))
 for name, data in (["Raw", X], ["PCA", X1], ["LBP", X2], ["LBP + PCA", X3]):
     kfold = model_selection.KFold(n_splits=num_folds)
     cv_results = model_selection.cross_val_score(GaussianNB(), data, y, cv=kfold, scoring=scoring)
@@ -33,27 +34,28 @@ for name, data in (["Raw", X], ["PCA", X1], ["LBP", X2], ["LBP + PCA", X3]):
     print(msg)
 
 DataNF = pd.read_csv('pdDataNF.csv')
-X = combineSeqData(DataNF)
-y = np.array(DataNF['Face'].values)
+X4 = combineSeqData(DataNF)
+y4 = np.array(DataNF['Face'].values)
 
-# X1 27个特征
+# X5 27个特征
 pca = PCA(n_components=27, svd_solver='auto',
-          whiten=True).fit(X)
-X1 = pca.transform(X)
+          whiten=True).fit(X4)
+X5 = pca.transform(X4)
 
-# X2 LBP
-X2 = combineLBPSeqData(DataNF)
+# X6 LBP
+X6 = combineLBPSeqData(DataNF)
 
-# X3 LBP + PCA 27个特征
+# X7 LBP + PCA 27个特征
 pca = PCA(n_components=27, svd_solver='auto',
-          whiten=True).fit(X2)
-X3 = pca.transform(X2)
+          whiten=True).fit(X6)
+X7 = pca.transform(X6)
 
 num_folds = 10
 scoring = 'accuracy'
 
 print("Combined funny&smiling Naive Bayes：")
-for name, data in (["Raw", X], ["PCA", X1], ["LBP", X2], ["LBP + PCA", X3]):
+print("The face label of the dataset contains:",list(set(DataNF['Face'])))
+for name, data in (["Raw", X4], ["PCA", X5], ["LBP", X6], ["LBP + PCA", X7]):
     kfold = model_selection.KFold(n_splits=num_folds)
     cv_results = model_selection.cross_val_score(GaussianNB(), data, y, cv=kfold, scoring=scoring)
     msg = "%s NB: %f (%f)" % (name, cv_results.mean(), cv_results.std())
