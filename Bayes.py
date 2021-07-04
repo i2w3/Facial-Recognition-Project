@@ -53,7 +53,7 @@ X7 = pca.transform(X6)
 num_folds = 10
 scoring = 'accuracy'
 
-print("Combined funny&smiling Naive Bayes：")
+print("Combined funny & smiling Naive Bayes：")
 print("The face label of the dataset contains:",list(set(DataNF['Face'])))
 for name, data in (["Raw", X4], ["PCA", X5], ["LBP", X6], ["LBP + PCA", X7]):
     kfold = model_selection.KFold(n_splits=num_folds)
