@@ -57,5 +57,7 @@ y2 = np.array(Data['Face'].values)  # 读取分类类型的标签
 
 ## 2.Run Models
 Bayes.py(贝叶斯)
+
 DT&RT.py(决策树及随机森林)
+
 KNN.py(K近邻)
