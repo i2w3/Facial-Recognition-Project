@@ -6,6 +6,9 @@ import pandas as pd
 from PIL import Image
 from skimage import data, filters
 from skimage.feature import local_binary_pattern
+from sklearn import preprocessing
+from sklearn.decomposition import PCA
+from sklearn.neighbors import KNeighborsClassifier
 
 # 定义数据路径
 labelPath = 'face/'  # 标签路径
@@ -28,7 +31,7 @@ def getFid(DataName):
         # 将图像从 512*512 压缩到 128*128
         if array.shape == (512, 512):
             array = cv2.resize(array, (128, 128))
-            print(DataName, '已经从 512 * 512 压缩到 128 * 128')
+            # print(DataName, '已经从 512 * 512 压缩到 128 * 128')
         return array
 
 
@@ -135,3 +138,115 @@ def combineLBPSeqData(DataFrame):
         fid = getLBPFid(str(i))
         data[j] = fid.flatten()
     return data
+
+
+# 预置一些数据预处理方法：标准化、正则化、二值化
+# Standardization
+def standardilize(DataFrame):
+    x_standard = preprocessing.StandardScaler().fit(DataFrame)
+    x = x_standard.transform(DataFrame)
+    return x
+
+
+# Regularization
+def regularization(DataFrame):
+    x_normalizer = preprocessing.Normalizer().fit(DataFrame)
+    x = x_normalizer.transform(DataFrame)
+    return x
+
+
+# Binarization
+def binarizer(Dataframe):
+    x_binarizer = preprocessing.Binarizer().fit(Dataframe)
+    x = x_binarizer.transform(Dataframe)
+    return x
+
+
+# PCA
+def pca(Dataframe):
+    x_pca = PCA(n_components=76, svd_solver='auto', whiten=True).fit(Dataframe)
+    x = x_pca.transform(Dataframe)
+    return x
+
+
+# KNN的参数设置
+# kNN(k=1)
+def kNN1(Dataframe, y_):
+    neigh = KNeighborsClassifier(n_neighbors=1, weights='distance',
+                                 algorithm='auto', leaf_size=30, p=2,
+                                 metric='minkowski', metric_params=None,
+                                 n_jobs=None)
+    neigh.fit(Dataframe[:3000], y_[:3000])
+    # Take the first 3000 training set images for training
+    right = 0
+    wrong = 0
+    for i in range(3001, 3969):
+        # Take the latter 969 training set images for testing
+        l = neigh.predict([Dataframe[i]])
+        if l == y_[i]:
+            right = right + 1
+        else:
+            wrong = wrong + 1
+    accuracy = right / 969
+    wrong_rate = wrong / 969
+    return [accuracy, wrong_rate]
+
+
+# kNN(k=3)
+def kNN2(Dataframe, y_):
+    neigh = KNeighborsClassifier(n_neighbors=3, weights='distance',
+                                 algorithm='auto', leaf_size=30, p=2,
+                                 metric='minkowski', metric_params=None,
+                                 n_jobs=None)
+    neigh.fit(Dataframe[:3000], y_[:3000])
+    right = 0
+    wrong = 0
+    for i in range(3001, 3969):
+        l = neigh.predict([Dataframe[i]])
+        if l == y_[i]:
+            right = right + 1
+        else:
+            wrong = wrong + 1
+    accuracy = right / 969
+    wrong_rate = wrong / 969
+    return [accuracy, wrong_rate]
+
+
+# kNN(k=5)
+def kNN3(Dataframe, y_):
+    neigh = KNeighborsClassifier(n_neighbors=5, weights='distance',
+                                 algorithm='auto', leaf_size=30, p=2,
+                                 metric='minkowski', metric_params=None,
+                                 n_jobs=None)
+    neigh.fit(Dataframe[:3000], y_[:3000])
+    right = 0
+    wrong = 0
+    for i in range(3001, 3969):
+        l = neigh.predict([Dataframe[i]])
+        if l == y_[i]:
+            right = right + 1
+        else:
+            wrong = wrong + 1
+    accuracy = right / 969
+    wrong_rate = wrong / 969
+    return [accuracy, wrong_rate]
+
+
+# kNN(k=7)
+def kNN4(Dataframe, y_):
+    neigh = KNeighborsClassifier(n_neighbors=7, weights='distance',
+                                 algorithm='auto', leaf_size=30, p=2,
+                                 metric='minkowski', metric_params=None,
+                                 n_jobs=None)
+    neigh.fit(Dataframe[:3000], y_[:3000])
+    right = 0
+    wrong = 0
+    for i in range(3001, 3969):
+        l = neigh.predict([Dataframe[i]])
+        if l == y_[i]:
+            right = right + 1
+        else:
+            wrong = wrong + 1
+    accuracy = right / 969
+    wrong_rate = wrong / 969
+    return [accuracy, wrong_rate]
