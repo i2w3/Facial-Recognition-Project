@@ -1,7 +1,7 @@
 # How to download
 下载并安装[git](https://git-scm.com/downloads)
 
-再去命令行输入一下命令
+再去命令行输入以下命令
 ```git
 git clone git@github.com:i2w3/pypy.git
 ```
