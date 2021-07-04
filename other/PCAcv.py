@@ -10,7 +10,7 @@ pca = PCA()
 pipe1 = Pipeline(steps=[('pca', pca), ('NB', GaussianNB())])
 pipe2 = Pipeline(steps=[('pca', pca), ('BB', BernoulliNB())])
 
-Data = pd.read_csv('pdData.csv')
+Data = pd.read_csv('../pdData.csv')
 seq = np.array(Data['Seq'], dtype=str)
 target = np.array(Data['Face'].values)
 target_names = list(set(Data['Face']))
