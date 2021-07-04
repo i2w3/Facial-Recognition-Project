@@ -16,11 +16,12 @@ pip install pillow
 pip install opencv-python
 conda install numpy
 conda install pandas
+conda install seaborn
 conda install scikit-learn
 conda install scikit-image
 ```
 ## 1.Run build_pdData.py
-生成pdData.csv，该文件类似这样：
+生成pdData.csv(可以不生成，用自带的，都是一样的)，该文件类似这样：
 
 |Seq|Sex|Age|Race|Face|Prop|
 |----|----|----|----|----|----|
@@ -56,3 +57,5 @@ y2 = np.array(Data['Face'].values)  # 读取分类类型的标签
 
 ## 2.Run Models
 Bayes.py(贝叶斯)
+DT&RT.py(决策树及随机森林)
+KNN.py(K近邻)
