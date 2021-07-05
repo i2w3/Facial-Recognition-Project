@@ -17,5 +17,5 @@ plt.pie(y1, labels=x1, explode=explode, colors=colors,
         autopct='%1.1f%%', shadow=True, startangle=100)
 
 plt.axis('equal')
-plt.savefig('./data.png', bbox_inches='tight')
+plt.savefig('./plotDataSet.png', bbox_inches='tight')
 plt.show()
