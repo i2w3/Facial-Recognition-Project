@@ -3,12 +3,55 @@
 
 再去命令行输入以下命令
 ```git
-git clone git@github.com:i2w3/pypy.git
+git clone https://github.com/i2w3/pypy.git
 ```
 下载太慢？试试Github镜像站
 ```
 git clone https://ghproxy.com/https://github.com/i2w3/pypy.git
 ```
+# File Tree
+以树的形式展示该项目的文件结构
+```File Tree
+pypy
+│  BP.py（神经网络）
+│  Bayes.py（贝叶斯）
+│  DT&RF.py（决策树和随即森林）
+│  KNN.py（K近邻）
+│  SVM.py（支持向量机）
+│  build_pdData.py（生成pdData.csv & pdDataNF.csv）
+│  DataProcess.py（存放一些数据处理的代码）
+│  main.py（放一些调用pdData.csv & pdDataNF.csv的实例）
+│  pdData.csv（存放有效数据的序号、标签）
+│  pdDataNF.csv（存放合并"funny"和"smiling"的有效数据的序号、标签）
+│  Bayes LBP+PCA调参.ipynb（梯度下降搜索贝叶斯分类器的最佳LBP+PCA参数的运行结果）
+│  Bayes PCA调参.ipynb（梯度下降搜索贝叶斯分类器的最佳PCA参数的运行结果）
+│  plotBPTrainTimeACC.py（以下都是画图的函数，图像输出在plot目录）
+│  plotDataSet.py
+│  plotTreeDepth.py
+│  
+├─face（存放数据集）
+│  │  Demo.m
+│  │  faceDR（存放标签数据）
+│  │  faceDS（存放标签数据）
+│  │  人脸图像识别项目说明.doc
+│  │  
+│  └─rawdata（存放图像数据）
+│          1223
+│          1224
+│          1225
+│           .......
+│          
+├─other（存放其他代码）
+│      line.py（测试正则表达式）
+│      PCAcv.py（PCA参数搜索）
+│      resize.py（图像压缩测试）
+│      
+└─plot（画图函数的输出图像）
+        plotBPTrainAcc.png
+        plotDataSet.png
+        plotTreeDepth.png
+```
+
 # How to use
 ## 0.install requirements
 ```cmd
@@ -56,8 +99,12 @@ y2 = np.array(Data['Face'].values)  # 读取分类类型的标签
 ```
 
 ## 2.Run Models
+BP.py(神经网络)
+
 Bayes.py(贝叶斯)
 
 DT&RT.py(决策树及随机森林)
 
 KNN.py(K近邻)
+
+SVM.py(支持向量机)
