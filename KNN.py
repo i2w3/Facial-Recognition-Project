@@ -87,11 +87,13 @@ X3 = pca3.transform(x_3)
 num_folds = 10
 scoring = 'accuracy'
 
-for name, data in (["Raw", X], ["PCA+std", X1], ["PCA+reg", X2], ["PCA+bin", X3]):
-    kfold = model_selection.KFold(n_splits=num_folds)
-    cv_results = model_selection.cross_val_score(
-        KNeighborsClassifier(n_neighbors=5, weights='distance', algorithm='auto',
-                             leaf_size=30, p=2, metric='minkowski', metric_params=None,
-                             n_jobs=-1), data, y, cv=kfold, scoring=scoring)
-    msg = "%s NB: %f" % (name, cv_results.mean())
-    print(msg)
+for k in [5, 7]:
+    print("K-value equals to", k)
+    for name, data in (["Raw", X], ["PCA+std", X1], ["PCA+reg", X2], ["PCA+bin", X3]):
+        kfold = model_selection.KFold(n_splits=num_folds)
+        cv_results = model_selection.cross_val_score(
+            KNeighborsClassifier(n_neighbors=k, weights='distance', algorithm='auto',
+                                 leaf_size=30, p=2, metric='minkowski', metric_params=None,
+                                 n_jobs=-1), data, y, cv=kfold, scoring=scoring)
+        msg = "%s NB: %f" % (name, cv_results.mean())
+        print(msg)
