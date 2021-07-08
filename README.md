@@ -17,7 +17,7 @@ pypy
 │  Bayes.py（贝叶斯）
 │  DT&RF.py（决策树和随即森林）
 │  KNN.py（K近邻）
-│  SVM.py（支持向量机）
+│  SVM.ipynb（支持向量机）
 │  build_pdData.py（生成pdData.csv & pdDataNF.csv）
 │  DataProcess.py（存放一些数据处理的代码）
 │  main.py（放一些调用pdData.csv & pdDataNF.csv的实例）
@@ -107,4 +107,4 @@ DT&RT.py(决策树及随机森林)
 
 KNN.py(K近邻)
 
-SVM.py(支持向量机)
+SVM.ipynb(支持向量机)
